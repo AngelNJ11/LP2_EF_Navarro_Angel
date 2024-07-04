@@ -12,7 +12,7 @@
     }
 
     .form-login {
-      background-color: rgba(255, 255, 255, 0.548); 
+      background-color: rgba(255, 255, 255, 0.9); /* Ajuste del color de fondo */
       padding: 20px;
       border: 1px solid #ddd;
       border-radius: 5px;
@@ -21,23 +21,29 @@
   </style>
 </head>
 <body>
-<div class="card shadow-sm p-4">
-  <div th:if="${loginInvalido}" class="alert alert-danger" role="alert">
-    <span th:text="${loginInvalido}"></span>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-4 form-login">
+        <div th:if="${loginInvalido}" class="alert alert-danger" role="alert">
+          <span th:text="${loginInvalido}"></span>
+        </div>
+        <h2 class="card-title text-center mb-4">Inicio de Sesión</h2>
+        <form th:action="@{/login}" method="post" th:object="${usuario}">
+          <div class="form-group">
+            <label for="username">Correo</label>
+            <input th:field="*{correo}" type="email" class="form-control" id="username" name="username" placeholder="Ingrese su usuario" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input th:field="*{password}" type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+          <a href="/registrar" class="d-block mt-3 text-center">Registrar Usuario</a>
+        </form>
+      </div>
+    </div>
   </div>
-  <h2 class="card-title text-center mb-4">Inicio de Sesión</h2>
-  <form th:action="@{/login}" method="post" th:object="${usuario}">
-    <div class="form-group">
-      <label for="username">Correo</label>
-      <input th:field="*{correo}" type="email" class="form-control" id="username" name="username" placeholder="Ingrese su usuario" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input th:field="*{password}" type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-    <a href="/registrar">Registrar Usuario</a>
-  </form>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
